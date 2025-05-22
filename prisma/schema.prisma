@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int               @id @default(autoincrement())
+  email     String            @unique
+  name      String?
+  password  String?
+  image     String?
+  role      String            @default("user") // Can be "admin" or "user"
+  hardware  HardwareProfile[]
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+}
+
+model Game {
+  id          Int          @id @default(autoincrement())
+  title       String
+  genreId     Int
+  genre       Genre        @relation(fields: [genreId], references: [id])
+  platformId  Int
+  platform    Platform     @relation(fields: [platformId], references: [id])
+  requirements Requirement[]
+  tags        GameTag[]
+  releaseYear Int
+  imageData   Bytes?
+}
+
+model HardwareProfile {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  cpuId     Int
+  gpuId     Int
+  ram       Int
+  vram      Int
+  createdAt DateTime  @default(now())
+
+  cpu       Component @relation("CPU", fields: [cpuId], references: [id])
+  gpu       Component @relation("GPU", fields: [gpuId], references: [id])
+}
+
+model Requirement {
+  id        Int       @id @default(autoincrement())
+  gameId    Int
+  game      Game      @relation(fields: [gameId], references: [id])
+  minCpuId  Int
+  minGpuId  Int
+  minRam    Int
+  minVram   Int
+  recCpuId  Int
+  recGpuId  Int
+  recRam    Int
+  recVram   Int
+
+  minCpu    Component @relation("MinCPU", fields: [minCpuId], references: [id])
+  minGpu    Component @relation("MinGPU", fields: [minGpuId], references: [id])
+  recCpu    Component @relation("RecCPU", fields: [recCpuId], references: [id])
+  recGpu    Component @relation("RecGPU", fields: [recGpuId], references: [id])
+}
+
+model Genre {
+  id    Int     @id @default(autoincrement())
+  name  String
+  games Game[]
+}
+
+model Platform {
+  id    Int     @id @default(autoincrement())
+  name  String
+  games Game[]
+}
+
+model Tag {
+  id    Int      @id @default(autoincrement())
+  name  String
+  games GameTag[]
+}
+
+model GameTag {
+  gameId Int
+  tagId  Int
+
+  game   Game @relation(fields: [gameId], references: [id])
+  tag    Tag  @relation(fields: [tagId], references: [id])
+
+  @@id([gameId, tagId])
+}
+
+model Manufacturer {
+  id         Int         @id @default(autoincrement())
+  name       String
+  components Component[]
+}
+
+model Component {
+  id             Int            @id @default(autoincrement())
+  name           String
+  type           String
+  manufacturerId Int
+  manufacturer   Manufacturer   @relation(fields: [manufacturerId], references: [id])
+  benchmarkScore Int             // Новый столбец для баллов производительности
+  
+  hardwareProfilesCPU HardwareProfile[] @relation("CPU")
+  hardwareProfilesGPU HardwareProfile[] @relation("GPU")
+  
+  minCpuRequirements Requirement[] @relation("MinCPU")
+  minGpuRequirements Requirement[] @relation("MinGPU")
+  recCpuRequirements Requirement[] @relation("RecCPU")
+  recGpuRequirements Requirement[] @relation("RecGPU")
+}

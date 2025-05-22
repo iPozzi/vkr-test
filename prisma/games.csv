@@ -1,0 +1,101 @@
+id,title,genreId,platformId,releaseYear,imageUrl
+1,The Witcher 3: Wild Hunt,1,3,2015,https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg
+2,The Elder Scrolls V: Skyrim,1,1,2011,https://cdn.cloudflare.steamstatic.com/steam/apps/72850/header.jpg
+3,Fallout 4,1,1,2015,https://cdn.cloudflare.steamstatic.com/steam/apps/377160/header.jpg
+4,Cyberpunk 2077,1,2,2020,https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg
+5,Mass Effect 2,1,1,2010,https://cdn.cloudflare.steamstatic.com/steam/apps/24980/header.jpg
+6,Dragon Age: Inquisition,1,2,2014,https://cdn.cloudflare.steamstatic.com/steam/apps/1222690/header.jpg
+7,Final Fantasy XV,1,1,2016,https://cdn.cloudflare.steamstatic.com/steam/apps/637650/header.jpg
+8,Dark Souls III,1,2,2016,https://cdn.cloudflare.steamstatic.com/steam/apps/374320/header.jpg
+9,Elden Ring,1,3,2022,https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg
+10,Diablo III,1,3,2012,
+11,Baldur’s Gate 3,1,2,2023,https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg
+12,The Elder Scrolls IV: Oblivion,1,3,2006,https://cdn.cloudflare.steamstatic.com/steam/apps/22330/header.jpg
+13,Fallout: New Vegas,1,2,2010,https://cdn.cloudflare.steamstatic.com/steam/apps/22380/header.jpg
+14,Persona 5 Royal,1,3,2019,https://cdn.cloudflare.steamstatic.com/steam/apps/1687950/header.jpg
+15,Grand Theft Auto V,2,3,2013,https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg
+16,Red Dead Redemption 2,2,3,2018,https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg
+17,Assassin’s Creed Valhalla,2,3,2020,https://cdn.cloudflare.steamstatic.com/steam/apps/2208920/header.jpg
+18,Batman: Arkham Knight,2,3,2015,https://cdn.cloudflare.steamstatic.com/steam/apps/208650/header.jpg
+19,God of War (2018),2,2,2018,https://cdn.cloudflare.steamstatic.com/steam/apps/1593500/header.jpg
+20,The Last of Us Part I,2,2,2022,https://cdn.cloudflare.steamstatic.com/steam/apps/1888930/header.jpg
+21,Marvel’s Spider-Man (2018),2,2,2018,https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg
+22,Shadow of the Tomb Raider,2,3,2018,https://cdn.cloudflare.steamstatic.com/steam/apps/750920/header.jpg
+23,Devil May Cry 5,2,2,2019,https://cdn.cloudflare.steamstatic.com/steam/apps/601150/header.jpg
+24,Sekiro: Shadows Die Twice,2,1,2019,https://cdn.cloudflare.steamstatic.com/steam/apps/814380/header.jpg
+25,Prince of Persia: The Sands of Time,2,1,2003,https://cdn.cloudflare.steamstatic.com/steam/apps/13600/header.jpg
+26,Metal Gear Solid V: The Phantom Pain,2,3,2015,https://cdn.cloudflare.steamstatic.com/steam/apps/287700/header.jpg
+27,Yakuza 0,2,2,2015,https://cdn.cloudflare.steamstatic.com/steam/apps/638970/header.jpg
+28,Horizon Zero Dawn,2,1,2017,https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/header.jpg
+29,DOOM Eternal,3,3,2020,https://cdn.cloudflare.steamstatic.com/steam/apps/782330/header.jpg
+30,Call of Duty: Modern Warfare (2019),3,3,2019,
+31,Counter-Strike: Global Offensive,3,3,2012,https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg
+32,Overwatch,3,1,2016,
+33,Apex Legends,3,2,2019,https://cdn.cloudflare.steamstatic.com/steam/apps/1172470/header.jpg
+34,Destiny 2,3,3,2017,https://cdn.cloudflare.steamstatic.com/steam/apps/1085660/header.jpg
+35,Halo Infinite,3,2,2021,https://cdn.cloudflare.steamstatic.com/steam/apps/1240440/header.jpg
+36,Battlefield V,3,3,2018,https://cdn.cloudflare.steamstatic.com/steam/apps/1238810/header.jpg
+37,Rainbow Six Siege,3,3,2015,https://cdn.cloudflare.steamstatic.com/steam/apps/359550/header.jpg
+38,Left 4 Dead 2,3,3,2009,https://cdn.cloudflare.steamstatic.com/steam/apps/550/header.jpg
+39,Bioshock Infinite,3,2,2013,https://cdn.cloudflare.steamstatic.com/steam/apps/8870/header.jpg
+40,Borderlands 3,3,2,2019,https://cdn.cloudflare.steamstatic.com/steam/apps/397540/header.jpg
+41,Valorant,3,1,2020,
+42,Titanfall 2,3,3,2016,https://cdn.cloudflare.steamstatic.com/steam/apps/1237970/header.jpg
+43,Resident Evil 4 (2023),4,2,2023,https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg
+44,Resident Evil Village,4,3,2021,https://cdn.cloudflare.steamstatic.com/steam/apps/1196590/header.jpg
+45,Outlast,4,3,2013,https://cdn.cloudflare.steamstatic.com/steam/apps/238320/header.jpg
+46,Alien: Isolation,4,2,2014,https://cdn.cloudflare.steamstatic.com/steam/apps/214490/header.jpg
+47,Dead Space (2023),4,3,2023,https://cdn.cloudflare.steamstatic.com/steam/apps/1693980/header.jpg
+48,Silent Hill 2,4,3,2001,
+49,Amnesia: The Dark Descent,4,2,2010,https://cdn.cloudflare.steamstatic.com/steam/apps/57300/header.jpg
+50,The Evil Within 2,4,2,2017,https://cdn.cloudflare.steamstatic.com/steam/apps/601430/header.jpg
+51,Layers of Fear,4,3,2016,https://cdn.cloudflare.steamstatic.com/steam/apps/391720/header.jpg
+52,Until Dawn,4,1,2015,
+53,SOMA,4,3,2015,https://cdn.cloudflare.steamstatic.com/steam/apps/282140/header.jpg
+54,Phasmophobia,4,2,2020,https://cdn.cloudflare.steamstatic.com/steam/apps/739630/header.jpg
+55,Friday the 13th: The Game,4,3,2017,https://cdn.cloudflare.steamstatic.com/steam/apps/438740/header.jpg
+56,Little Nightmares,4,2,2017,https://cdn.cloudflare.steamstatic.com/steam/apps/424840/header.jpg
+57,Life is Strange,5,2,2015,https://cdn.cloudflare.steamstatic.com/steam/apps/319630/header.jpg
+58,The Walking Dead: Season One,5,3,2012,https://cdn.cloudflare.steamstatic.com/steam/apps/207610/header.jpg
+59,Firewatch,5,3,2016,https://cdn.cloudflare.steamstatic.com/steam/apps/383870/header.jpg
+60,Journey,5,3,2012,https://cdn.cloudflare.steamstatic.com/steam/apps/638230/header.jpg
+61,Oxenfree,5,3,2016,https://cdn.cloudflare.steamstatic.com/steam/apps/388880/header.jpg
+62,Monkey Island 2: LeChuck's Revenge,5,1,1991,
+63,Grim Fandango Remastered,5,2,2015,https://cdn.cloudflare.steamstatic.com/steam/apps/316790/header.jpg
+64,Day of the Tentacle Remastered,5,3,2016,https://cdn.cloudflare.steamstatic.com/steam/apps/388210/header.jpg
+65,What Remains of Edith Finch,5,2,2017,https://cdn.cloudflare.steamstatic.com/steam/apps/501300/header.jpg
+66,Inside,5,2,2016,https://cdn.cloudflare.steamstatic.com/steam/apps/304430/header.jpg
+67,Limbo,5,3,2010,https://cdn.cloudflare.steamstatic.com/steam/apps/48000/header.jpg
+68,Kentucky Route Zero,5,3,2020,https://cdn.cloudflare.steamstatic.com/steam/apps/231200/header.jpg
+69,Disco Elysium,5,2,2019,https://cdn.cloudflare.steamstatic.com/steam/apps/632470/header.jpg
+70,The Stanley Parable,5,2,2013,https://cdn.cloudflare.steamstatic.com/steam/apps/221910/header.jpg
+71,Return of the Obra Dinn,5,3,2018,https://cdn.cloudflare.steamstatic.com/steam/apps/653530/header.jpg
+72,Street Fighter V,6,1,2016,https://cdn.cloudflare.steamstatic.com/steam/apps/310950/header.jpg
+73,Tekken 7,6,3,2017,https://cdn.cloudflare.steamstatic.com/steam/apps/389730/header.jpg
+74,Mortal Kombat 11,6,1,2019,https://cdn.cloudflare.steamstatic.com/steam/apps/976310/header.jpg
+75,Guilty Gear -Strive-,6,1,2021,https://cdn.cloudflare.steamstatic.com/steam/apps/1384160/header.jpg
+76,Injustice 2,6,3,2017,https://cdn.cloudflare.steamstatic.com/steam/apps/627270/header.jpg
+77,Soulcalibur VI,6,1,2018,https://cdn.cloudflare.steamstatic.com/steam/apps/544750/header.jpg
+78,Dragon Ball FighterZ,6,1,2018,https://cdn.cloudflare.steamstatic.com/steam/apps/678950/header.jpg
+79,Dead or Alive 6,6,1,2019,https://cdn.cloudflare.steamstatic.com/steam/apps/838380/header.jpg
+80,Killer Instinct,6,3,2013,https://cdn.cloudflare.steamstatic.com/steam/apps/577940/header.jpg
+81,Marvel vs Capcom: Infinite,6,1,2017,https://cdn.cloudflare.steamstatic.com/steam/apps/493840/header.jpg
+82,BlazBlue: Central Fiction,6,3,2016,https://cdn.cloudflare.steamstatic.com/steam/apps/586140/header.jpg
+83,Samurai Shodown (2019),6,2,2019,https://cdn.cloudflare.steamstatic.com/steam/apps/1342260/header.jpg
+84,Skullgirls 2nd Encore,6,2,2015,https://cdn.cloudflare.steamstatic.com/steam/apps/245170/header.jpg
+85,Brawlhalla,6,2,2017,https://cdn.cloudflare.steamstatic.com/steam/apps/291550/header.jpg
+86,Forza Horizon 5,7,2,2021,https://cdn.cloudflare.steamstatic.com/steam/apps/1551360/header.jpg
+87,Need for Speed Heat,7,1,2019,https://cdn.cloudflare.steamstatic.com/steam/apps/1222680/header.jpg
+88,F1 23,7,3,2023,https://cdn.cloudflare.steamstatic.com/steam/apps/2108330/header.jpg
+89,Gran Turismo 7,7,3,2022,
+90,GRID 2,7,2,2013,https://cdn.cloudflare.steamstatic.com/steam/apps/44350/header.jpg
+91,DIRT Rally 2.0,7,1,2019,https://cdn.cloudflare.steamstatic.com/steam/apps/690790/header.jpg
+92,Project CARS 2,7,1,2017,https://cdn.cloudflare.steamstatic.com/steam/apps/378860/header.jpg
+93,Assetto Corsa Competizione,7,2,2019,https://cdn.cloudflare.steamstatic.com/steam/apps/805550/header.jpg
+94,The Crew 2,7,1,2018,https://cdn.cloudflare.steamstatic.com/steam/apps/646910/header.jpg
+95,Burnout Paradise Remastered,7,3,2018,https://cdn.cloudflare.steamstatic.com/steam/apps/1238080/header.jpg
+96,Wreckfest,7,1,2018,https://cdn.cloudflare.steamstatic.com/steam/apps/228380/header.jpg
+97,TrackMania Turbo,7,1,2016,https://cdn.cloudflare.steamstatic.com/steam/apps/375900/header.jpg
+98,NASCAR Heat 5,7,1,2020,https://cdn.cloudflare.steamstatic.com/steam/apps/1259800/header.jpg
+99,Forza Motorsport 7,7,1,2017,
+100,iRacing,7,1,2008,https://cdn.cloudflare.steamstatic.com/steam/apps/266410/header.jpg

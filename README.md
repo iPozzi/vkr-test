@@ -2,23 +2,81 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+### Локальная разработка
+
+Для запуска в режиме разработки:
 
 ```bash
 npm run dev
-# or
+# или
 yarn dev
-# or
+# или
 pnpm dev
-# or
+# или
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Откройте [http://localhost:3000](http://localhost:3000) в браузере для просмотра результата.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Настройка переменных окружения
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Создайте файл `.env` в корне проекта со следующими переменными:
+
+```
+# Database connection
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/vkr?schema=public
+
+# Next Auth
+NEXTAUTH_SECRET=your-secret-key-here
+NEXTAUTH_URL=http://localhost:3000
+```
+
+### Запуск с использованием Docker
+
+Проект поддерживает запуск через Docker Compose:
+
+```bash
+# Сборка образов
+docker-compose build
+
+# Запуск контейнеров в фоновом режиме
+docker-compose up -d
+
+# Просмотр логов
+docker-compose logs -f
+
+# Остановка контейнеров
+docker-compose down
+```
+
+### База данных
+
+Проект использует PostgreSQL через Prisma ORM. При запуске через Docker, база данных создается автоматически.
+
+Для применения миграций:
+
+```bash
+# Локально
+npx prisma migrate dev
+
+# В запущенном Docker-контейнере
+docker-compose exec app npx prisma migrate deploy
+```
+
+## Структура проекта
+
+- `app/` - исходный код React компонентов и страниц (Next.js App Router)
+- `components/` - переиспользуемые UI компоненты
+- `lib/` - вспомогательные функции и утилиты
+- `prisma/` - схема базы данных и миграции
+- `public/` - статические ресурсы
+- `styles/` - CSS стили
+
+## Дополнительные ресурсы
+
+- [Next.js Documentation](https://nextjs.org/docs) - документация Next.js
+- [Prisma Documentation](https://www.prisma.io/docs) - документация Prisma
+- [Docker Documentation](https://docs.docker.com) - документация Docker
 
 ## Learn More
 

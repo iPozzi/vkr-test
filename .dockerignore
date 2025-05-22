@@ -1,0 +1,31 @@
+# Зависимости
+node_modules
+npm-debug.log
+yarn.lock
+yarn-error.log
+
+# Next.js
+.next
+out
+
+# Env файлы
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Инструменты разработки
+.git
+.github
+.vscode
+*.md
+!README.md
+
+# Тесты
+__tests__
+coverage
+
+# Другие
+.DS_Store
+Thumbs.db 
