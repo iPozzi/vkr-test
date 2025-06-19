@@ -56,15 +56,16 @@ export default function GameSearch() {
   };
 
   const handleBlur = () => {
-    // Delay hiding to allow for clicking on results
-    setTimeout(() => setShowResults(false), 150);
+    if (query.trim()) {
+      setTimeout(() => setShowResults(false), 150);
+    }
   };
 
   return (
     <Card className="shadow-md max-w-xl mx-auto border-zinc-800 bg-card">
       <CardContent className="p-4">
         <form onSubmit={handleSubmit} className="flex gap-2">
-          <div className="relative flex-grow">
+          <div className="relative w-full max-w-md">
             <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
               <Search className="h-4 w-4 text-zinc-500" />
             </div>
@@ -77,26 +78,25 @@ export default function GameSearch() {
               onBlur={handleBlur}
               className="w-full pl-10 pr-4 border-zinc-800 bg-zinc-900"
             />
+            {showResults && results.length > 0 && (
+              <div className="absolute left-0 right-0 w-full bg-zinc-900 mt-1 rounded-md shadow-lg max-h-60 overflow-y-auto border border-zinc-800 z-10">
+                <ul className="py-1">
+                  {results.map((game) => (
+                    <li key={game.id}>
+                      <Link
+                        href={`/games/${game.id}`}
+                        className="block px-4 py-2 hover:bg-zinc-800 text-zinc-200"
+                      >
+                        {game.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
           <Button type="submit" className="shrink-0">Найти</Button>
         </form>
-
-        {showResults && results.length > 0 && (
-          <div className="absolute z-10 w-full max-w-[calc(100%-5rem)] bg-zinc-900 mt-1 rounded-md shadow-lg max-h-60 overflow-y-auto border border-zinc-800">
-            <ul className="py-1">
-              {results.map((game) => (
-                <li key={game.id}>
-                  <Link
-                    href={`/games/${game.id}`}
-                    className="block px-4 py-2 hover:bg-zinc-800 text-zinc-200"
-                  >
-                    {game.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
         
         {isLoading && (
           <div className="mt-2 text-sm text-zinc-500 text-center">

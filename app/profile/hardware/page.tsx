@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 import { useAuth } from '@/lib/useAuth';
+import { getGPUTier } from 'detect-gpu';
 
 interface Component {
   id: number;
@@ -43,6 +44,9 @@ export default function HardwareProfilePage() {
     gpuId: "",
     ram: 8,
   });
+
+  const [gpuDetectLoading, setGpuDetectLoading] = useState(false);
+  const [gpuDetectResult, setGpuDetectResult] = useState<string | null>(null);
 
   // Redirect if not logged in
   useEffect(() => {
@@ -139,6 +143,31 @@ export default function HardwareProfilePage() {
     }
   };
 
+  const handleDetectGPU = async () => {
+    setGpuDetectLoading(true);
+    setGpuDetectResult(null);
+    try {
+      const result = await getGPUTier();
+      if (!result.gpu) {
+        setGpuDetectResult('Видеокарта не определена');
+        return;
+      }
+      // Найти наиболее подходящий GPU в списке gpus
+      const gpuName = typeof result.gpu === 'string' ? result.gpu : '';
+      const found = gpus.find(gpu => gpuName.toLowerCase().includes(gpu.name.toLowerCase()));
+      if (found) {
+        setFormData(prev => ({ ...prev, gpuId: found.id.toString() }));
+        setGpuDetectResult(`Обнаружено: ${found.manufacturer.name} ${found.name}`);
+      } else {
+        setGpuDetectResult(`Видеокарта определена как: ${gpuName}, но не найдена в списке`);
+      }
+    } catch (e) {
+      setGpuDetectResult('Ошибка при определении видеокарты');
+    } finally {
+      setGpuDetectLoading(false);
+    }
+  };
+
   if (authLoading || loadingProfile) {
     return (
       <div className="flex justify-center items-center p-8">
@@ -149,7 +178,7 @@ export default function HardwareProfilePage() {
 
   return (
     <div className="max-w-2xl mx-auto mt-8">
-      <h1 className="text-3xl font-bold mb-6">Мой профиль оборудования</h1>
+      <h1 className="text-3xl font-bold mb-6">Мои комплектующие</h1>
       
       {error && (
         <div className="bg-red-500 text-white p-4 rounded-md mb-6">
@@ -159,14 +188,14 @@ export default function HardwareProfilePage() {
       
       {success && (
         <div className="bg-green-500 text-white p-4 rounded-md mb-6">
-          Профиль оборудования успешно сохранен!
+          Комплектующие успешно сохранены!
         </div>
       )}
       
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-4">
           <h2 className="text-xl font-semibold border-b border-zinc-800 pb-2">
-            {profile ? "Обновить профиль" : "Создать профиль"}
+            {profile ? "Обновить комплектующие" : ""}
           </h2>
           
           <div>
@@ -209,6 +238,19 @@ export default function HardwareProfilePage() {
                 </option>
               ))}
             </select>
+            <button
+              type="button"
+              onClick={handleDetectGPU}
+              className="mt-3 px-3 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-md font-medium focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              disabled={gpuDetectLoading}
+              tabIndex={0}
+              aria-label="Определить видеокарту"
+            >
+              {gpuDetectLoading ? 'Определение...' : 'Определить видеокарту'}
+            </button>
+            {gpuDetectResult && (
+              <div className="text-sm mt-2 text-blue-300">{gpuDetectResult}</div>
+            )}
           </div>
           
           <div className="grid grid-cols-2 gap-4">
@@ -240,8 +282,8 @@ export default function HardwareProfilePage() {
             {loading 
               ? "Сохранение..." 
               : profile 
-                ? "Обновить профиль" 
-                : "Создать профиль"
+                ? "Обновить комплектующие" 
+                : "Сохранить комплектующие"
             }
           </button>
         </div>

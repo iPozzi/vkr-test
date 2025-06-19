@@ -10,19 +10,17 @@ import { matchGames } from '@/lib/matchGames';
  *   ram: number,          // в ГБ
  *   vram: number,         // в МБ
  *   minPerformanceRatio?: number, // минимальный запас производительности
+ *   genreId?: number,
  * }
  * 
  * Логика:
- * - Жёсткий фильтр по минимальным требованиям (ПК >= минималки)
- * - Сортировка по запасу производительности для рекомендованных требований
- * - Показ всех подходящих игр без ограничений по tolerance
  */
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { cpuId, gpuId, ram, vram, minPerformanceRatio } = body;
+    const { cpuId, gpuId, ram, vram, minPerformanceRatio, genreId } = body;
 
-    console.log("API /match - получен запрос:", { cpuId, gpuId, ram, vram, minPerformanceRatio });
+    console.log("API /match - получен запрос:", { cpuId, gpuId, ram, vram, minPerformanceRatio, genreId });
 
     if (ram == null || vram == null) {
       console.error("API /match - ошибка: отсутствуют обязательные параметры ram и vram");
@@ -41,7 +39,8 @@ export async function POST(req: Request) {
       gpuId, 
       ram, 
       vram,
-      minPerformanceRatio: minPerformanceRatio ?? 0.0
+      minPerformanceRatio: minPerformanceRatio ?? 0.0,
+      genreId,
     });
     const executionTime = Date.now() - startTime;
 
@@ -57,7 +56,7 @@ export async function POST(req: Request) {
       // Добавляем информацию о том, что был запрос с нулевым результатом
       return NextResponse.json({
         games: [],
-        query: { cpuId, gpuId, ram, vram, minPerformanceRatio },
+        query: { cpuId, gpuId, ram, vram, minPerformanceRatio, genreId },
         error: "Не найдено игр, соответствующих заданным параметрам"
       });
     }

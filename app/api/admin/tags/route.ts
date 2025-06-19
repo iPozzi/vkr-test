@@ -198,19 +198,12 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    // Проверка использования тега в играх
-    const usedInGames = await prisma.gameTag.findFirst({
+    // Удаление всех связей тега с играми
+    await prisma.gameTag.deleteMany({
       where: {
         tagId
       }
     });
-
-    if (usedInGames) {
-      return NextResponse.json(
-        { message: 'Cannot delete tag: it is used by one or more games' },
-        { status: 400 }
-      );
-    }
 
     // Удаление тега
     await prisma.tag.delete({

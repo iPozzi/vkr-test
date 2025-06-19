@@ -71,6 +71,16 @@ const LoginPage = () => {
                   autoComplete="current-password"
                 />
               </div>
+              <div className="mt-2 text-right">
+                <a
+                  href="/forgot-password"
+                  className="text-blue-600 underline text-sm hover:text-blue-500 transition"
+                  tabIndex={0}
+                  aria-label="Забыли пароль?"
+                >
+                  Забыли пароль?
+                </a>
+              </div>
             </div>
             <button
               type="submit"

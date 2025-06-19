@@ -7,6 +7,7 @@ interface MatchParams {
   ram: number;       // в ГБ
   vram: number;      // в МБ 
   minPerformanceRatio?: number; // минимальный запас производительности (по умолчанию 0)
+  genreId?: number; // фильтр по жанру
 }
 
 /**
@@ -18,9 +19,10 @@ export async function matchGames({
   gpuId,
   ram,
   vram,
-  minPerformanceRatio = 0
+  minPerformanceRatio = 0,
+  genreId,
 }: MatchParams) {
-  console.log("Входные параметры:", { cpuId, gpuId, ram, vram, minPerformanceRatio });
+  console.log("Входные параметры:", { cpuId, gpuId, ram, vram, minPerformanceRatio, genreId });
   
   // Получаем информацию о компонентах пользователя, если они указаны
   let userCpuScore = 0;
@@ -74,6 +76,7 @@ export async function matchGames({
 
   // Загружаем все игры с требованиями + базовыми связями
   const games = await prisma.game.findMany({
+    where: genreId ? { genreId } : undefined,
     include: {
       requirements: {
         include: {

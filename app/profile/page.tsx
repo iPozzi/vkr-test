@@ -1,15 +1,19 @@
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/useAuth';
 import { UserCircle, LogOut, Shield } from 'lucide-react';
 import HardwareProfilePage from './hardware/page';
 import Link from 'next/link';
+import { getGPUTier, TierResult } from 'detect-gpu';
 
 const ProfilePage = () => {
   const { user, loading, logout } = useAuth();
   const router = useRouter();
+  const [gpuInfo, setGpuInfo] = useState<TierResult | null>(null);
+  const [gpuLoading, setGpuLoading] = useState(false);
+  const [gpuError, setGpuError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -26,6 +30,19 @@ const ProfilePage = () => {
   const handleLogout = async () => {
     await logout();
     router.replace('/login');
+  };
+
+  const handleDetectGPU = async () => {
+    setGpuLoading(true);
+    setGpuError(null);
+    try {
+      const result = await getGPUTier();
+      setGpuInfo(result);
+    } catch (e) {
+      setGpuError('Не удалось определить видеокарту.');
+    } finally {
+      setGpuLoading(false);
+    }
   };
 
   return (
@@ -49,6 +66,26 @@ const ProfilePage = () => {
         >
           <LogOut className="w-5 h-5" /> Выйти
         </button>
+        <div className="w-full mt-6 flex flex-col items-center">
+          <button
+            onClick={handleDetectGPU}
+            className="px-6 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white font-semibold transition mb-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            disabled={gpuLoading}
+            aria-label="Определить видеокарту"
+            tabIndex={0}
+          >
+            {gpuLoading ? 'Определение...' : 'Определить видеокарту'}
+          </button>
+          {gpuError && <div className="text-red-500 text-sm mt-1">{gpuError}</div>}
+          {gpuInfo && (
+            <div className="w-full bg-zinc-800 rounded-lg p-4 mt-2 text-zinc-100">
+              <div className="mb-1"><span className="font-semibold">GPU:</span> {gpuInfo.gpu || '—'}</div>
+              <div className="mb-1"><span className="font-semibold">Tier:</span> {gpuInfo.tier}</div>
+              <div className="mb-1"><span className="font-semibold">FPS:</span> {gpuInfo.fps || '—'}</div>
+              <div className="mb-1"><span className="font-semibold">Type:</span> {gpuInfo.type || '—'}</div>
+            </div>
+          )}
+        </div>
       </div>
       {user.role === 'user' && (
         <div className="w-full max-w-2xl">
@@ -77,6 +114,12 @@ const ProfilePage = () => {
               className="flex items-center gap-2 px-6 py-3 rounded-lg bg-green-800 hover:bg-green-700 transition text-white font-semibold focus:ring-2 focus:ring-green-400 focus:outline-none"
             >
               <Shield className="w-5 h-5" /> Управление жанрами
+            </Link>
+            <Link
+              href="/admin/components"
+              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-yellow-800 hover:bg-yellow-700 transition text-white font-semibold focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+            >
+              <Shield className="w-5 h-5" /> Управление компонентами
             </Link>
           </div>
         </div>

@@ -33,6 +33,7 @@ const schema = z.object({
   ram: z.string(),
   vram: z.string(),
   minPerformanceRatio: z.string().optional(),
+  genreId: z.string().optional(),
 });
 
 export type ComponentOption = { id: number; name: string };
@@ -54,6 +55,8 @@ interface GameResult {
   tags: { tag: { id: number; name: string } }[];
 }
 
+interface GenreOption { id: number; name: string; }
+
 interface Props {
   cpus: ComponentOption[];
   gpus: ComponentOption[];
@@ -64,7 +67,15 @@ export default function HardwareForm({ cpus, gpus }: Props) {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const [validationErrors, setValidationErrors] = React.useState<Record<string, string>>({});
+  const [genres, setGenres] = React.useState<GenreOption[]>([]);
   const formRef = React.useRef<HTMLFormElement>(null);
+
+  React.useEffect(() => {
+    fetch('/api/genres')
+      .then(res => res.json())
+      .then(data => setGenres(data))
+      .catch(() => setGenres([]));
+  }, []);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -88,7 +99,8 @@ export default function HardwareForm({ cpus, gpus }: Props) {
             gpuId: Number(data.gpuId),
             ram: Number(data.ram),
             vram: Number(data.vram),
-            minPerformanceRatio: data.minPerformanceRatio ? Number(data.minPerformanceRatio) : 0
+            minPerformanceRatio: data.minPerformanceRatio ? Number(data.minPerformanceRatio) : 0,
+            genreId: data.genreId && data.genreId !== 'any' ? Number(data.genreId) : undefined,
           }),
         });
         
@@ -98,7 +110,24 @@ export default function HardwareForm({ cpus, gpus }: Props) {
         }
         
         const json = await res.json();
-        setGames(json);
+        const processedGames = json.map((game: any) => {
+          if (game.imageData && !(
+            game.imageData.type === 'Buffer' &&
+            Array.isArray(game.imageData.data)
+          )) {
+            // Собираем из ключей "0","1",… нормальный массив байтов
+            const byteValues = Object.values(game.imageData as Record<string, number>);
+            return {
+              ...game,
+              imageData: {
+                type: 'Buffer',
+                data: byteValues,
+              },
+            };
+          }
+          return game;
+        });
+        setGames(processedGames);
         
         if (json.length === 0) {
           setError('По данным параметрам не найдено подходящих игр. Попробуйте снизить минимальный запас производительности или выбрать более мощные компоненты.');
@@ -131,7 +160,7 @@ export default function HardwareForm({ cpus, gpus }: Props) {
           <CardTitle className="text-xl text-center">Укажите параметры вашего компьютера</CardTitle>
           <p className="text-sm text-zinc-400 text-center mt-2">
             Алгоритм использует реальные баллы производительности и показывает ВСЕ игры, 
-            где ваш ПК соответствует минимальным требованиям
+            где ваш ПК соответствует требованиям
           </p>
         </CardHeader>
         <CardContent className="p-6">
@@ -219,6 +248,24 @@ export default function HardwareForm({ cpus, gpus }: Props) {
                   </SelectContent>
                 </Select>
               </div>
+            </div>
+
+            {/* Жанр */}
+            <div className="mb-6">
+              <Label htmlFor="genreId" className="font-medium">Жанр игры</Label>
+              <Select name="genreId" defaultValue="any">
+                <SelectTrigger id="genreId" className="w-full border-zinc-800 bg-zinc-900">
+                  <SelectValue placeholder="Любой жанр" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="any">Любой жанр</SelectItem>
+                  {genres.map((g) => (
+                    <SelectItem key={g.id} value={String(g.id)}>
+                      {g.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Фильтр по запасу производительности */}
